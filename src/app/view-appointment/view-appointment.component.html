@@ -1,0 +1,33 @@
+<h3 class="text-center my-5 items_title" style="color: black;"> View Appointment</h3>
+
+<div class="container">
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." class="form-control">
+        <button class="search-btn">Search</button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let ScheduleAppointment of filteredAppointments; let i=index">
+            <div class="card" style="background-image: url(https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=);">
+                <div class="card-body">
+                    <h5 class="card-title">{{ ScheduleAppointment.name }}</h5>
+                    <p class="card-text">
+                        <strong>User ID:</strong> {{ ScheduleAppointment.user_id }}<br>
+                        <strong>DOB:</strong> {{ ScheduleAppointment.dob }}<br>
+                        <strong>Phone Number:</strong> {{ ScheduleAppointment.phoneNumber }}<br>
+                        <strong>Health Issue:</strong> {{ ScheduleAppointment.healthIssue }}<br>
+                        <strong>Select Doctor:</strong> {{ ScheduleAppointment.selectDoctor }}<br>
+                        <strong>Select Date:</strong> {{ ScheduleAppointment.selectDate }}<br>
+                        <strong>Select Slot:</strong> {{ ScheduleAppointment.selectSlot }}<br>
+                        <strong>Select City:</strong> {{ ScheduleAppointment.selectCity }}<br>
+                        <strong>Select Hospital:</strong> {{ ScheduleAppointment.selectHospital }}<br>
+                        <strong>Gender:</strong> {{ ScheduleAppointment.gender }}<br>
+                        <strong>Age:</strong> {{ ScheduleAppointment.age }}
+                    </p>
+                    <button class="btn btn-danger" (click)="confirmCancel(ScheduleAppointment.user_id)">Cancel</button>&nbsp;&nbsp;
+                    <button class="btn btn-primary" (click)="confirmReschedule()">Reschedule</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

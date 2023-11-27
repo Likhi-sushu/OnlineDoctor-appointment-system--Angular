@@ -1,0 +1,50 @@
+.image-slider {
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.navigation-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+button {
+  padding: 10px;
+  background-color:transparent;
+  color: rgb(7, 7, 7);
+  border: none;
+  cursor: pointer;
+}
+.dots-container {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: transparent; /* or background-color: none; */
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: transparent; /* or background-color: none; */
+}
