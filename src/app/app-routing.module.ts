@@ -26,35 +26,38 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PatientReportComponent } from './patient-report/patient-report.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { AuthGuard } from './auth.guard';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
 
   {path:"",component:IndexComponent},
   {path:"login",component:LoginComponent},
-  {path:"profile",component:ProfileComponent},
+  {path:"profile",component:ProfileComponent,canActivate : [AuthGuard]},
    {path:"signup",component:signupComponent},
-   {path:"customerDashboard",component:CustomerDashboardComponent},
-   {path:"adminDashboard",component:AdminDashboardComponent},
-   {path:"viewitems",component:ViewitemsComponent},
+   {path:"customerDashboard",component:CustomerDashboardComponent, canActivate : [AuthGuard]},
+   {path:"adminDashboard",component:AdminDashboardComponent,canActivate : [AuthGuard]},
+   {path:"viewitems",component:ViewitemsComponent,canActivate : [AuthGuard]},
    {path:"ContactUs", component:ContactUsComponent},
    {path:"about", component:aboutComponent},
-   {path:"ViewAppointment",component:ViewAppointmentComponent},
-  {path:"book",component:BookComponent},
-  {path:"doctordetails",component:DoctorDetailsComponent},
+   {path:"ViewAppointment",component:ViewAppointmentComponent,canActivate : [AuthGuard]},
+  {path:"book",component:BookComponent,canActivate : [AuthGuard]},
+  {path:"doctordetails",component:DoctorDetailsComponent,canActivate : [AuthGuard]},
   {path:"success",component:SuccessComponent},
-{path:"search-filter",component:SearchFilterComponent},
+{path:"search-filter",component:SearchFilterComponent,canActivate : [AuthGuard]},
 {path:"feedback-form",component:FeedbackFormComponent},
-{path:"patient-dashboard",component:PatientDashboardComponent},
+{path:"patient-dashboard",component:PatientDashboardComponent,canActivate : [AuthGuard]},
 {path:"add-doctor",component:AddDoctorComponent},
-{path:"menu",component:MenuComponent},
-{path:"payment",component:PaymentComponent},
-{path:"otp",component:OtpComponent},
+{path:"menu",component:MenuComponent,canActivate : [AuthGuard]},
+{path:"payment",component:PaymentComponent,canActivate : [AuthGuard]},
+{path:"otp",component:OtpComponent,canActivate : [AuthGuard]},
 {path:"prescription",component:PrescriptionComponent},
 {path:"pmedication",component:PmedicationComponent},
-{path:"view-profile",component:ViewProfileComponent},
+{path:"view-profile",component:ViewProfileComponent,canActivate : [AuthGuard]},
 { path: 'edit-profile', component: EditProfileComponent },
 { path: 'edit-profile/:user_id', component: EditProfileComponent },
-{path:'patient-report',component:PatientReportComponent},
+{path:'**',component:NotfoundComponent},
+{path:'patient-report',component:PatientReportComponent,canActivate : [AuthGuard]},
 {
   path: 'view-profile/:user_id',
   component: ViewProfileComponent

@@ -35,6 +35,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { PasswordMaskPipe } from './password-mask.pipe';
 import { PatientReportComponent } from './patient-report/patient-report.component';
 import { UserAppointmentsComponent } from './user-appointments/user-appointments.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 
@@ -71,6 +72,7 @@ import { UserAppointmentsComponent } from './user-appointments/user-appointments
         PasswordMaskPipe,
         PatientReportComponent,
         UserAppointmentsComponent,
+        NotfoundComponent,
       
       
         

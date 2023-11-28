@@ -85,42 +85,84 @@ export class PatientReportComponent implements OnInit {
         this.filteredReports = this.filteredReports.filter(report => report.id !== id);
       });
     }
-  downloadPDF(report: any) {
-    const documentDefinition = {
-        content: [
-            { 
-                text: 'Patient Report', 
-                style: 'header',
-                margin: [0, 0, 0, 20]
-            },
-            {
-                table: {
-                    widths: ['*', '*', '*', '*'],
-                    body: [
-                        [{ text: 'ID', bold: true }, { text: 'Name', bold: true }, { text: 'Age', bold: true }, { text: 'Diagnosis', bold: true }],
-                        [report.id, report.name, report.age, report.diagnosis],
-                        [{ text: 'Notes', colSpan: 4, bold: true }, {}, {}, {}],
-                        [{ text: report.notes, colSpan: 4, fillColor: '#f2f2f2' }, {}, {}, {}]
-                    ]
-                },
-                layout: {
-                    fillColor: function(rowIndex: number) {
-                        return rowIndex % 2 === 0 ? '#FFFFFF' : '#f9f9f9';
-                    }
-                }
-            }
-        ],
-        styles: {
-            header: {
-                fontSize: 22,
-                bold: true
-            }
-        }
-    };
-
-    pdfMake.createPdf(documentDefinition as any).download(`PatientReport_${report.id}.pdf`);
-}
-
+    downloadPDF(report: any) {
+      const hospitalName = "Apollo";
+      const hospitalLogoUrl = "https://th.bing.com/th/id/OIP.n4BNR5cQpPAN_gM2xZaUHAAAAA?pid=ImgDet&w=203&h=175&c=7&dpr=1.5";
+  
+      // Function to convert an image URL to a dataURL
+      const urlToDataUrl = async (url: string): Promise<string> => {
+          const response = await fetch(url);
+          const blob = await response.blob();
+          return new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result as string);
+              reader.readAsDataURL(blob);
+          });
+      };
+  
+      // Generate the PDF once the image is converted to dataURL
+      urlToDataUrl(hospitalLogoUrl).then((logoDataUrl) => {
+          const documentDefinition = {
+              content: [
+                  {
+                      table: {
+                          widths: ['auto', '*'],
+                          body: [
+                              [
+                                  { 
+                                      image: logoDataUrl, 
+                                      width: 100,
+                                      alignment: 'center',
+                                      margin: [0, 10, 0, 0] // Top-center
+                                  },
+                                  { 
+                                      text: hospitalName, 
+                                      style: 'hospitalName',
+                                      alignment: 'center',
+                                      margin: [0, 10, 0, 0] // Center
+                                  }
+                              ]
+                          ]
+                      },
+                      layout: 'noBorders'
+                  },
+                  { 
+                      text: 'Patient Report', 
+                      style: 'header',
+                      margin: [0, 10, 0, 10]
+                  },
+                  {
+                      table: {
+                          widths: ['auto', '*'],
+                          body: [
+                              ['ID:', report.id],
+                              ['Name:', report.name],
+                              ['Age:', report.age],
+                              ['Diagnosis:', report.diagnosis],
+                              ['Notes:', report.notes]
+                          ]
+                      },
+                      margin: [0, 0, 0, 20],
+                      layout: 'lightHorizontalLines'
+                  }
+              ],
+              styles: {
+                  header: {
+                      fontSize: 22,
+                      bold: true,
+                      margin: [0, 0, 0, 10]
+                  },
+                  hospitalName: {
+                      fontSize: 16, // Adjust the font size for the hospital name
+                      bold: true
+                  }
+              }
+          };
+  
+          pdfMake.createPdf(documentDefinition as any).download(`PatientReport_${report.id}.pdf`);
+      });
+  }
+  
   
   }
   
